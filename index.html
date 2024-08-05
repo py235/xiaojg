@@ -1,28 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tiaozhuang</title>
-    <link rel="stylesheet" href="index.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小金刚搜索引擎</title>
+<style>
+    body {
+        font-family: Arial, sans-serif; /* 使用更优雅的字体 */
+        color: #333;
+    }
+    
+    h2 {
+        color: blue; /* 设置标题颜色为蓝色 */
+        margin-bottom: 10px; /* 增加底部边距 */
+    }
+
+    #search-container {
+        margin-bottom: 10px;
+    }
+
+    #search-box {
+        width: 300px;
+        padding: 5px;
+        margin-right: 5px;
+    }
+
+    #engine-options label {
+        margin-right: 10px;
+    }
+</style>
 </head>
 <body>
-    <form action="1.html" method="get">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <input type="submit" value="Submit" >
-    </form>
+<h2>搜索</h2>
+<div id="search-container">
+    <input type="text" id="search-box" placeholder="输入搜索关键词" onkeydown="handleKeyPress(event)">
+    <button onclick="performSearch()">搜索</button>
+</div>
 
-    <script>
-        function validateForm() {
-          var username = document.forms["myForm"]["username"].value;
-          var password = document.forms["myForm"]["password"].value;
-          if (username == "1" || password == "1") {
-              alert("Username and Password must be filled out");
-              return false;
-          }
+<div id="engine-options">
+    <input type="radio" id="google" name="search-engine" value="https://search.bilibili.com/all?keyword=" checked>
+    <label for="google">B站</label> 
+    <input type="radio" id="weixin" name="search-engine" value="https://weixin.sogou.com/weixin?type=2&query=">
+    <label for="weixin ">微信</label>
+
+    <input type="radio" id="baidu" name="search-engine" value="https://www.baidu.com/s?wd=">
+    <label for="baidu">百度</label>
+    <input type="radio" id="bing" name="search-engine" value="https://www.bing.com/search?q=">
+    <label for="bing">必应</label>
+</div>
+
+<script>
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+            performSearch();
         }
-      </script>
-</body>
+    }
+
+    function performSearch() {
+        var searchBox = document.getElementById('search-box');
+        var selectedEngine = document.querySelector('input[name="search-engine"]:checked').value;
+        var searchQuery = searchBox.value;
+
+        if (searchQuery) {
+            window.open(selectedEngine + searchQuery, '_blank');
+        }
+    }
+</script>
 </html>
